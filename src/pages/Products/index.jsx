@@ -49,12 +49,12 @@ const Products = () => {
   return (
     <div style={{ width: '100%', marginTop: 32, fontFamily: 'Poppins, Arial, sans-serif' }}>
       <Typography variant="h4" gutterBottom sx={{ px: { xs: 1, sm: 2 }, color: '#a9251d', fontSize: { xs: 24, sm: 32 } }} style={{ textAlign: 'center' }}>Products</Typography>
-      <Grid container spacing={2} sx={{ mb: 2, px: { xs: 1, sm: 3 }, justifyContent: 'center' }} style={{ margin: '0 auto', maxWidth: 1400 }}>
-        <Grid item xs={12} sm={6} md={4}>
-          <TextField label="Search" fullWidth sx={{ minWidth: { xs: 220, sm: 300, md: 500 }, maxWidth: { xs: 340, sm: 400, md: 600 } }} value={search} onChange={e => setSearch(e.target.value)} />
+      <Grid container spacing={{ xs: 1, sm: 2 }} style={{margin: '0 auto'}} sx={{ mb: 2, px: { xs: 'auto', sm: 4 }, justifyContent: 'center', maxWidth: { xs: 340, sm: 1400 }, margin: '0 auto' }}>
+        <Grid item xs={12} sm={6} md={5} sx={{ display: 'flex', justifyContent: 'center' }}>
+          <TextField label="Search" fullWidth sx={{ minWidth: { xs: 240, sm: 220, md: 500 }, maxWidth: { xs: 300, sm: 400, md: 600 }, mx: { xs: 0.5, sm: 1 } }} value={search} onChange={e => setSearch(e.target.value)} />
         </Grid>
-        <Grid item xs={12} sm={4} md={3}>
-          <FormControl fullWidth sx={{ minWidth: { xs: 220, sm: 120, md: 200 }, maxWidth: { xs: 340, sm: 300, md: 400 } }}>
+        <Grid item xs={12} sm={4} md={3} sx={{ display: 'flex', justifyContent: 'center' }}>
+          <FormControl fullWidth sx={{ minWidth: { xs: 240, sm: 120, md: 200 }, maxWidth: { xs: 300, sm: 300, md: 400 }, mx: { xs: 0.5, sm: 1 } }}>
             <InputLabel>Category</InputLabel>
             <Select value={category} label="Category" onChange={e => setCategory(e.target.value)}>
               <MenuItem value="">All</MenuItem>
@@ -66,8 +66,8 @@ const Products = () => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={4} md={3}>
-          <FormControl fullWidth sx={{ minWidth: { xs: 220, sm: 120, md: 200 }, maxWidth: { xs: 340, sm: 300, md: 400 } }}>
+        <Grid item xs={12} sm={4} md={3} sx={{ display: 'flex', justifyContent: 'center' }}>
+          <FormControl fullWidth sx={{ minWidth: { xs: 240, sm: 140, md: 200 }, maxWidth: { xs: 300, sm: 300, md: 400 }, mx: { xs: 0.5, sm: 1 } }}>
             <InputLabel>College</InputLabel>
             <Select value={college} label="College" onChange={e => setCollege(e.target.value)}>
               <MenuItem value="">All</MenuItem>
@@ -75,8 +75,8 @@ const Products = () => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={3} md={2}>
-          <FormControl fullWidth sx={{ minWidth: { xs: '100%', sm: 100, md: 180 } }}>
+        <Grid item xs={12} sm={4} md={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <FormControl fullWidth sx={{ minWidth: { xs: 240, sm: 140, md: 200 }, maxWidth: { xs: 300, sm: 200, md: 220 }, mx: { xs: 'auto', sm: 1 }, alignSelf: { xs: 'center', sm: 'stretch' } }}>
             <InputLabel>Sort By</InputLabel>
             <Select value={sortBy} label="Sort By" onChange={e => setSortBy(e.target.value)}>
               <MenuItem value="">None</MenuItem>
@@ -84,7 +84,7 @@ const Products = () => {
               <MenuItem value="title">Title</MenuItem>
             </Select>
           </FormControl>
-          <Button onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')} sx={{ mt: 1, width: '100%' }}>
+          <Button onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')} sx={{ mt: 1, width: '100%', mx: { xs: 0.5, sm: 1 } }}>
             {sortOrder === 'asc' ? 'Asc' : 'Desc'}
           </Button>
         </Grid>
