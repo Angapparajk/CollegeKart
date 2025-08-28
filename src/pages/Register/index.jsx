@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -10,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [form, setForm] = useState({ name: '', email: '', password: '', college: '', contact: '' });
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -39,26 +41,31 @@ const Register = () => {
   const isMobile = window.innerWidth <= 600;
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
     if (!emailRegex.test(form.email)) {
       setError('Invalid email format');
+      setLoading(false);
       return;
     }
     if (form.password.length < 6) {
       setError('Password must be at least 6 characters');
+      setLoading(false);
       return;
     }
     if (!form.name || !form.college) {
       setError('Name and College are required');
+      setLoading(false);
       return;
     }
     try {
       await axios.post('https://collegekart-backend.onrender.com/api/users/register', form);
       setSuccess('Registration successful!');
+      setLoading(false);
       setTimeout(() => navigate('/login'), 1200);
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
+      setLoading(false);
     }
   };
 
@@ -85,7 +92,10 @@ const Register = () => {
                 <TextField label="Contact" name="contact" fullWidth margin="normal" value={form.contact} onChange={handleChange} sx={{ fontSize: { xs: '1.1rem', sm: '1.2rem' }, background: 'rgba(227,242,253,0.25)', borderRadius: 2, boxShadow: '0 1px 4px #e3f2fd' }} />
                 {error && <Typography color="error" sx={{ fontWeight: 700, textAlign: 'center', mt: 1 }}>{error}</Typography>}
                 {success && <Typography sx={{ color: '#388e3c', fontWeight: 700, textAlign: 'center', mt: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}><CheckCircleIcon sx={{ fontSize: 22, color: '#388e3c' }} /> {success}</Typography>}
-                <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2, py: 1.2, fontWeight: 700, fontSize: { xs: '1.1rem', sm: '1.2rem' }, borderRadius: 2, boxShadow: '0 2px 8px #a9251d', background: 'linear-gradient(90deg,#a9251d 60%,#0a73b0 100%)' }}>Register</Button>
+                <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2, py: 1.2, fontWeight: 700, fontSize: { xs: '1.1rem', sm: '1.2rem' }, borderRadius: 2, boxShadow: '0 2px 8px #a9251d', background: 'linear-gradient(90deg,#a9251d 60%,#0a73b0 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }} disabled={loading}>
+                  Register
+                  {loading && <CircularProgress size={22} sx={{ color: '#fff', ml: 1 }} />}
+                </Button>
               </form>
               <Typography sx={{ mt: 2, textAlign: 'center', fontWeight: 600, fontSize: { xs: '1rem', sm: '1.1rem' } }}>
                 Already have an account? <a href="/login" style={{ color: '#0a73b0', fontWeight: 700, textDecoration: 'underline' }}>Login</a>
