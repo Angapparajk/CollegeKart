@@ -130,6 +130,7 @@ const Sell = () => {
       <Container maxWidth="sm" sx={{ mt: { xs: 2, sm: 4 }, fontFamily: 'Poppins, Arial, sans-serif' }}>
         <Paper elevation={3} sx={{ p: { xs: 2, sm: 4 }, background: '#fff', border: '2px solid #0a73b0', borderRadius: 3 }}>
           <Typography variant="h5" gutterBottom sx={{ color: '#a9251d' }}>Sell Product</Typography>
+          <Typography variant="h6" sx={{ color: '#0a73b0', fontWeight: 700, mb: 2 }}>Your Published Products</Typography>
           {loading ? <Loader /> : products.length === 0 ? (
             <Typography sx={{ color: '#0a73b0' }}>You have not published any products yet.</Typography>
           ) : (
@@ -176,7 +177,6 @@ const Sell = () => {
                         headers: { Authorization: `Bearer ${token}` }
                       });
                       setProducts(products.filter(p => p._id !== product._id));
-                      // Refresh sold products list
                       const res = await axios.get(`https://collegekart-backend.onrender.com/api/sold/user/${user.id}`, {
                         headers: { Authorization: `Bearer ${token}` }
                       });

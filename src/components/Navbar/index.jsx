@@ -48,6 +48,7 @@ const Navbar = () => {
         backdropFilter: 'blur(16px)',
         zIndex: 1201,
         transition: 'all 0.3s',
+        width:'100vw',
       }}
       elevation={3}
     >
